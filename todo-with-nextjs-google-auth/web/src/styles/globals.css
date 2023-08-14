@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-3xl font-bold pt-3 pb-3;
+  }
+  h2 {
+    @apply text-2xl font-bold pt-2 pb-2;
+  }
+  h3 {
+    @apply text-xl font-medium pt-1 pb-1;
+  }
+}
+
+@layer components {
+  html,
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: Roboto, sans-serif;
+  }
+
+  .main-container {
+    @apply bordered-container mt-20 lg:max-w-screen-lg sm:max-w-[90%];
+  }
+
+  .bordered-container {
+    @apply mx-auto max-w-screen-lg rounded-xl p-6 flex-auto bg-gray-50 border border-solid border-gray-200;
+  }
+
+  .menu-horizontal {
+    right: -84px;
+  }
+  .menu-horizontal li {
+    @apply mx-1 items-center;
+  }
+  .menu-horizontal .navbar-sub.login, 
+  .menu-horizontal {
+    left: unset;
+    right: -12px;
+  }
+  .menu-horizontal li:last-of-type .navbar-sub {
+    left: unset;
+    right: -12px;
+  }
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+  }
+  .navbar-sub {
+    @apply navbar p-0;
+    @apply flex flex-col origin-center absolute mt-12 w-48 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5 focus:outline-none;
+    left: 0;
+  }
+  .nav-link {
+    @apply h-10 text-secondary;
+    user-select: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  .nav-link.selected {
+    @apply bg-primary-dark;
+  }
+  .navbar-drawer {
+    @apply bg-white;
+  }
+  .navbar-drawer li {
+    @apply my-1;
+  }
+  .navbar-drawer .nav-sub-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .navbar-drawer .nav-sub-wrapper:hover {
+    background-color: unset;
+  }
+  .nav-item {
+    @apply px-3 rounded-md text-sm font-medium flex items-center;
+  }
+
+  button {
+    @apply rounded-md text-center disabled:opacity-50 p-3 pt-1 pb-1 h-8;
+  }
+}
+
+.item-enter {
+  opacity: 0;
+}
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 700ms ease-in;
+}
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 700ms ease-out;
+}
