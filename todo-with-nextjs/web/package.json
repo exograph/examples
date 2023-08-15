@@ -4,6 +4,7 @@
   "private": false,
   "license": "Apache-2.0",
   "scripts": {
+    "predev": "graphql-codegen",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

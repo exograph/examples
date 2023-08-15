@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <html>
       <head>
-        <title>Exograph Multi-User Todo</title>
+        <title>Exograph Todo App with Authentication</title>
       </head>
       <body>
         <Providers>
