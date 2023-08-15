@@ -49,7 +49,7 @@ export const GoogleButton: FunctionComponent<GoogleButtonParams> = React.memo(
           text: isSignUp ? "signup_with" : "signin_with",
         });
       }
-    }, [scriptLoaded, divRef, onCredentialResponse]);
+    }, [scriptLoaded, divRef, isSignUp, onCredentialResponse]);
 
     return (
       <>

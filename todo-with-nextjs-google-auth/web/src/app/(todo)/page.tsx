@@ -42,7 +42,7 @@ export default function Page() {
 
   useEffect(() => {
     refetch();
-  }, [status]);
+  }, [status, refetch]);
 
   if (!data || loading) return null;
   const todos = data?.todos.map((todoItem) => {

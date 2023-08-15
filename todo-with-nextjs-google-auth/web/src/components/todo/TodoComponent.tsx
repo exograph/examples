@@ -19,11 +19,11 @@ const newTodo: TodoDetailsFragment = {
 export default function TodoComponent(props: TodoProps) {
   const { user } = useAuth();
 
-  if (!user?.sub) return null;
-
   const { id, todo, addTodo, updateTodo, deleteTodo } = props;
   const [currentTodo, setCurrentTodo] = useState(todo || newTodo);
   const [isEditable, setEditable] = useState(!id);
+
+  if (!user?.sub) return null;
 
   function changeTitle(e: React.ChangeEvent<HTMLInputElement>) {
     const updatedTodo = { ...currentTodo, title: e.currentTarget.value };

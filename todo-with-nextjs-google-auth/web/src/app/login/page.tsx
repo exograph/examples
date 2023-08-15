@@ -59,7 +59,7 @@ export default function Login({
         {error && <div className="pt-2 text-red-500">{error}</div>}
       </div>
       <div className="flex justify-center">
-        Don't have an account?&nbsp;
+        Don&apos;t have an account?&nbsp;
         <Link href="/signup" className="text-blue-500">
           Sign Up
         </Link>
