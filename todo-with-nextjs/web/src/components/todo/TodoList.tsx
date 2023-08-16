@@ -60,7 +60,7 @@ export default function TodoList({
   }
 
   return (
-    <div className="mx-auto flex-col h-screen lg:w-1/2 w-full rounded-xl p-2 lg:p-12 border shadow-xl">
+    <div className="mx-auto bg-gray-100 dark:bg-slate-800 flex-col h-screen lg:w-1/2 w-full rounded-xl p-2 lg:p-12 border shadow-xl">
       <TransitionGroup
         name={allowAnimation.current ? "item-list" : ""}
         component="ul"

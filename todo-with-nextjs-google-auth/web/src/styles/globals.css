@@ -58,7 +58,7 @@
     left: 0;
   }
   .nav-link {
-    @apply h-10 text-secondary;
+    @apply h-10 text-secondary dark:text-secondary-dark;
     user-select: none;
     cursor: pointer;
     padding: 0;

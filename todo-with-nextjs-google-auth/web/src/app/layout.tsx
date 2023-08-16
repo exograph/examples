@@ -15,7 +15,9 @@ export default function RootLayout({
       <body>
         <Providers>
           <Drawer>
-            <main>{children}</main>
+            <main className="bg-white dark:bg-slate-900 dark:text-gray-300">
+              {children}
+            </main>
           </Drawer>
         </Providers>
       </body>

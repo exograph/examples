@@ -55,7 +55,7 @@ export default function Page() {
   }
 
   const commonClasses =
-    "mr-6 ml-6 flex h-8 w-16 items-center justify-center rounded-md";
+    "mr-6 ml-6 flex h-10 w-24 items-center justify-center rounded-md text-xl dark:text-white";
 
   return (
     <div className="flex flex-col h-screen items-center justify-between p-2 pt-24 pb-6">

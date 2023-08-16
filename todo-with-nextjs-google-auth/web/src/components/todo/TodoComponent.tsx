@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { useAuth } from "@/components/auth/AuthProvider";
 import { TodoDetailsFragment } from "@/__generated__/graphql";
 
 interface TodoProps {
@@ -17,13 +16,9 @@ const newTodo: TodoDetailsFragment = {
 };
 
 export default function TodoComponent(props: TodoProps) {
-  const { user } = useAuth();
-
   const { id, todo, addTodo, updateTodo, deleteTodo } = props;
   const [currentTodo, setCurrentTodo] = useState(todo || newTodo);
   const [isEditable, setEditable] = useState(!id);
-
-  if (!user?.sub) return null;
 
   function changeTitle(e: React.ChangeEvent<HTMLInputElement>) {
     const updatedTodo = { ...currentTodo, title: e.currentTarget.value };
@@ -73,7 +68,7 @@ export default function TodoComponent(props: TodoProps) {
         onChange={changeCompleted}
       />
       <input
-        className="min-w-[18rem] border-b-2 border-gray-300 bg-transparent pl-1 focus:outline-none max-sm:max-w-[12rem]"
+        className="min-w-[18rem] text-2xl border-b-2 border-gray-300 dark:border-slate-700 dark:text-gray-300 bg-transparent pl-1 focus:outline-none max-sm:max-w-[12rem]"
         placeholder="Add new item..."
         onChange={changeTitle}
         onKeyUp={handleEnterKey}
@@ -86,7 +81,7 @@ export default function TodoComponent(props: TodoProps) {
       <div className="flex">
         {!id && (
           <button onClick={() => addNewTodo()}>
-            <PlusIcon className="h-5 w-5 text-green-700 hover:text-green-900" />
+            <PlusIcon className="h-5 w-5 text-green-700 hover:text-green-900 dark:text-green-500 dark:hover:text-green-600" />
           </button>
         )}
         {deleteTodo && id && (

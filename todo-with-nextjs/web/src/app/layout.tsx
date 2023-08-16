@@ -13,7 +13,7 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
-          <main>{children}</main>
+          <main className="bg-white dark:bg-slate-900">{children}</main>
         </Providers>
       </body>
     </html>
