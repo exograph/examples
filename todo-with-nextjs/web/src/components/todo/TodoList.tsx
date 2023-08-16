@@ -60,7 +60,7 @@ export default function TodoList({
   }
 
   return (
-    <div className="mx-auto flex-col h-screen rounded-xl p-2 lg:p-12 border shadow-xl">
+    <div className="mx-auto flex-col h-screen lg:w-1/2 w-full rounded-xl p-2 lg:p-12 border shadow-xl">
       <TransitionGroup
         name={allowAnimation.current ? "item-list" : ""}
         component="ul"
@@ -74,7 +74,7 @@ export default function TodoList({
               timeout={allowAnimation.current ? 700 : 0}
               classNames={allowAnimation.current ? "item" : ""}
             >
-              <li className="mx-auto flex items-center gap-2 py-3">
+              <li className="flex items-center justify-center gap-2 py-3">
                 <TodoComponent
                   id={id}
                   todo={todo}
@@ -88,7 +88,7 @@ export default function TodoList({
         })}
       </TransitionGroup>
       {status !== TodoStatus.Complete && (
-        <div className="mx-auto mt-4 flex items-center gap-2">
+        <div className="mt-4 flex items-center justify-center gap-2">
           <TodoComponent addTodo={addItem} updateTodo={updateItem} />
         </div>
       )}
