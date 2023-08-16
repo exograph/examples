@@ -19,11 +19,9 @@ A todo application that uses the following technologies:
 
 You'll also need to create a Google API Client ID by following these [instructions](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid).
 
-Once you have your Google API Client ID, copy the `.env.local.example` file to `.env.local` in the web directory. Then, update the `NEXT_PUBLIC_GOOGLE_ID` variable with that ID.
-
 ## Running the application
 
-Clone this repository to your local machine and navigate to the root directory.
+Clone this repository to your local machine and navigate to the `todo-with-nextjs-google-auth` directory.
 
 ### Backend
 
@@ -35,6 +33,8 @@ exo yolo
 ```
 
 ### Frontend
+
+**Copy the `.env.local.example` file to `.env.local` in the web directory. Then, update the `NEXT_PUBLIC_GOOGLE_ID` variable with the Google API Client ID.**
 
 Open a new terminal window and run the following commands:
 

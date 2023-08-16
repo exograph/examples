@@ -75,7 +75,7 @@ export default function TodoComponent(props: TodoProps) {
         onMouseDown={handleDoubleClick}
         onBlur={handleBlur}
         value={currentTodo.title}
-        autoFocus={true}
+        autoFocus={isEditable}
         readOnly={!isEditable}
       ></input>
       <div className="flex">

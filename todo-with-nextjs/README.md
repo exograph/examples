@@ -18,7 +18,7 @@ A todo application that uses the following technologies:
 
 ## Running the application
 
-Clone this repository to your local machine and navigate to the root directory.
+Clone this repository to your local machine and navigate to the `todo-with-nextjs` directory.
 
 ### Backend
 
