@@ -1,5 +1,7 @@
 # Simple Todo Web Application
 
+[Read the accompanying blog post](https://exograph.dev/blog/evolving-access-control)
+
 A todo application that uses the following technologies:
 
 - [Exograph](https://exograph.dev) for the backend
