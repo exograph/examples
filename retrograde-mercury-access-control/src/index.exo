@@ -1,0 +1,18 @@
+@postgres
+module DeploymentModule {
+  @access(query = true, mutation = !AstroContext.mercuryRetrograde)
+  type Deployment {
+    @pk id: Int = autoIncrement()
+    version: String
+  }
+}
+
+context AstroContext {
+  @query("mercuryRetrograde") mercuryRetrograde: Boolean
+}
+
+@deno("astro.ts")
+module AstroModule {
+  @access(true)
+  query mercuryRetrograde(): Boolean
+}
