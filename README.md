@@ -23,4 +23,4 @@ A multi-user todo application that uses the following technologies:
 
 A fun little exercise to illustrate Exograph's flexible access control
 
-[Source Code](retrograde-mercury-access-control), [Blog Post](retrograde-mercury)
+[Source Code](retrograde-mercury-access-control), [Blog Post](https://exograph.dev/blog/retrograde-mercury)
