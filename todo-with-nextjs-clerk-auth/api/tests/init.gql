@@ -1,0 +1,14 @@
+# Create a couple of todos to help with testing deletes and updates
+operation: |
+    mutation {
+        createTodos(data: [
+            {title: "U1-T1", completed: false},
+            {title: "U1-T2", completed: true}
+        ]) {
+            id
+        }
+    }
+auth: |
+  {
+      "sub": "u1"
+  }     
