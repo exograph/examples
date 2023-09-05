@@ -1,6 +1,8 @@
 Example applications built using [Exograph](https://exograph.dev).
 
-# Simple Todo Web Application
+# Todo applications with Exograph
+
+## Simple Todo Web Application without Authentication
 
 A single-user todo application that uses the following technologies:
 
@@ -9,7 +11,17 @@ A single-user todo application that uses the following technologies:
 
 [Source Code](todo-with-nextjs), [Blog Post](https://exograph.dev/blog/evolving-access-control)
 
-# A Multi-user Todo Web Application
+## Multi-user Todo Web Application with Clerk Authentication
+
+A multi-user todo application that uses the following technologies:
+
+- [Exograph](https://exograph.dev) for the backend
+- [Next.js](https://nextjs.org/) and [Tailwind](https://tailwindcss.com/) for the frontend
+- [Clerk](https://clerk.com) for authentication
+
+[Source Code](todo-with-nextjs-clerk-auth), [Blog Post](https://exograph.dev/blog/exograph-clerk)
+
+## Multi-user Todo Web Application with Google Authentication
 
 A multi-user todo application that uses the following technologies:
 
@@ -19,7 +31,9 @@ A multi-user todo application that uses the following technologies:
 
 [Source Code](todo-with-nextjs-google-auth), [Blog Post](https://exograph.dev/blog/evolving-access-control)
 
-# Mercury Retrograde Access Control
+# Others
+
+## Mercury Retrograde Access Control
 
 A fun little exercise to illustrate Exograph's flexible access control
 
