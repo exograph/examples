@@ -31,7 +31,7 @@ Open a new terminal window and run the following commands:
 
 ```bash
 cd api
-EXO_JWKS_ENDPOINT=https://<...>.auth0.com/.well-known/jwks.json exo yolo
+EXO_OIDC_URL=https://<...>.auth0.com exo yolo
 ```
 
 ### Frontend
