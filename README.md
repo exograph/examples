@@ -21,6 +21,16 @@ A multi-user todo application that uses the following technologies:
 
 [Source Code](todo-with-nextjs-clerk-auth), [Blog Post](https://exograph.dev/blog/exograph-clerk)
 
+## Multi-user Todo Web Application with Auth0 Authentication
+
+A multi-user todo application that uses the following technologies:
+
+- [Exograph](https://exograph.dev) for the backend
+- [Next.js](https://nextjs.org/) and [Tailwind](https://tailwindcss.com/) for the frontend
+- [Auth0](https://auth0.com) for authentication
+
+[Source Code](todo-with-nextjs-auth0-auth), [Blog Post](https://exograph.dev/blog/exograph-auth0)
+
 ## Multi-user Todo Web Application with Google Authentication
 
 A multi-user todo application that uses the following technologies:
