@@ -1,0 +1,41 @@
+context AuthContext {
+  @jwt role: String 
+}
+
+@postgres
+module ConcertData {
+  @access(query = AuthContext.role == "admin" || self.published, mutation = AuthContext.role == "admin")
+  type Concert {
+    @pk id: Int = autoIncrement()
+    title: String
+    published: Boolean
+    venue: Venue
+  }
+
+  @access(query = AuthContext.role == "admin" || self.published, mutation = AuthContext.role == "admin")
+  type Venue {
+    @pk id: Int = autoIncrement()
+    name: String
+    published: Boolean
+    concerts: Set<Concert>?
+  }
+
+  @access(AuthContext.role == "admin")
+  type Subscriber {
+    @pk id: Int = autoIncrement()
+    email: String
+    subscribed: Boolean
+  }
+}
+
+@deno("email.ts")
+module EmailService {
+  @access(AuthContext.role == "admin")
+  mutation sendEmail(concertId: Int, @inject exograph: Exograph): Boolean
+}
+
+@deno("time.js")
+module Timing {
+  @around("query *")
+  interceptor time(operation: Operation)
+}
