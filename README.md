@@ -41,6 +41,12 @@ A multi-user todo application that uses the following technologies:
 
 [Source Code](todo-with-nextjs-google-auth), [Blog Post](https://exograph.dev/blog/evolving-access-control)
 
+## Concerts App from Documentation
+
+Sample application developed in the [Exograph Application Tutorial](https://exograph.dev/docs/application-tutorial/overview).
+
+[Source Code](concerts-app), [Documentation](https://exograph.dev/docs/application-tutorial/overview)
+
 # Others
 
 ## Mercury Retrograde Access Control
