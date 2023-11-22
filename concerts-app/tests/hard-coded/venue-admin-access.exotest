@@ -1,0 +1,39 @@
+operation: |
+  query {
+      venues(orderBy: {id: ASC}) {
+          id
+          name
+          published
+      }
+  }
+auth: |
+  {
+      "role": "admin"
+  }
+response: |
+  {
+    "data": {
+      "venues": [
+          {
+              "id": 1,
+              "name": "V1",
+              "published": true
+          },
+          {
+              "id": 2,
+              "name": "V2",
+              "published": false
+          },
+          {
+              "id": 3,
+              "name": "V3",
+              "published": true
+          },
+          {
+              "id": 4,
+              "name": "V4",
+              "published": false
+          }
+      ]
+    }
+  }

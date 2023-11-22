@@ -1,0 +1,19 @@
+operation: |
+    mutation {
+        v1: createVenue(data: {name: "V1", published: true}) {
+            id
+        }
+        v2: createVenue(data: {name: "V2", published: false}) {
+            id
+        }
+        v3: createVenue(data: {name: "V3", published: true}) {
+            id
+        }
+        v4: createVenue(data: {name: "V4", published: false}) {
+            id
+        }                       
+    }
+auth: |
+    {
+        "role": "admin"
+    }
