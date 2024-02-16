@@ -1,6 +1,6 @@
 import type { Exograph } from "./exograph";
 
-export async function sendEmail(concertId: number, exograph: Exograph): Promise<boolean> {
+export async function sendNotification(concertId: number, exograph: Exograph): Promise<boolean> {
 	const concertOperation = await exograph.executeQuery(`
 		query($concertId: Int!) {
 			concert(id: $concertId) {
@@ -23,12 +23,24 @@ export async function sendEmail(concertId: number, exograph: Exograph): Promise<
 	const subscriberEmails = subscribersOperation.subscribers.map(subscriber => subscriber.email);
 
 	const emailBody = `
-		<h1>${concertTitle}</h1>
-		<p>You have been invited to the concert!</p>
+    <h1>${concertTitle}</h1>
+    <p>You have been invited to the concert!</p>
 	`;
 
-	console.log(`Sending email ${emailBody} to ${subscriberEmails.join(', ')}`);
-
-	return true;
+	return await sendEmail(subscriberEmails, "Concert Announcement", emailBody);
 }
 
+
+async function sendEmail(
+	to: string[],
+	subject: string,
+	body: string
+): Promise<boolean> {
+	console.log(
+		`Sending email
+     to: ${to.join(', ')},
+     subject: ${subject},
+     body: ${body}`
+	);
+	return true;
+}

@@ -28,10 +28,10 @@ module ConcertData {
   }
 }
 
-@deno("email.ts")
-module EmailService {
+@deno("notification.ts")
+module NotificationService {
   @access(AuthContext.role == "admin")
-  mutation sendEmail(concertId: Int, @inject exograph: Exograph): Boolean
+  mutation sendNotification(concertId: Int, @inject exograph: Exograph): Boolean
 }
 
 @deno("time.js")
