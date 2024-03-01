@@ -2,9 +2,9 @@ Example applications built using [Exograph](https://exograph.dev).
 
 # Todo applications with Exograph
 
-## Simple Todo Web Application without Authentication
+## Single-user Todo Web Application without Authentication
 
-A single-user todo application that uses the following technologies:
+A simple single-user todo application that uses the following technologies:
 
 - [Exograph](https://exograph.dev) for the backend
 - [Next.js](https://nextjs.org/) and [Tailwind](https://tailwindcss.com/) for the frontend
@@ -41,9 +41,27 @@ A multi-user todo application that uses the following technologies:
 
 [Source Code](todo-with-nextjs-google-auth), [Blog Post](https://exograph.dev/blog/evolving-access-control)
 
-## Concerts App from Documentation
+## Single-user Todo Web Application with Apollo and Trusted Documents
 
-Sample application developed in the [Exograph Application Tutorial](https://exograph.dev/docs/application-tutorial/overview).
+A single-user todo application that uses the following technologies:
+
+- [Exograph](https://exograph.dev) for the backend
+- [Next.js](https://nextjs.org/), [Tailwind](https://tailwindcss.com/), and [Apollo](https://www.apollographql.com/docs/react/) for the frontend
+
+[Source Code](todo-with-nextjs-apollo-trusted-documents)
+
+## Single-user Todo Web Application with URQL and Trusted Documents
+
+A single-user todo application that uses the following technologies:
+
+- [Exograph](https://exograph.dev) for the backend
+- [Next.js](https://nextjs.org/), [Tailwind](https://tailwindcss.com/), and [Urql](https://formidable.com/open-source/urql/) for the frontend
+
+[Source Code](todo-with-nextjs-urql-trusted-documents)
+
+# Concerts App from Documentation
+
+The sample application developed in the [Exograph Application Tutorial](https://exograph.dev/docs/application-tutorial/overview).
 
 [Source Code](concerts-app), [Documentation](https://exograph.dev/docs/application-tutorial/overview)
 

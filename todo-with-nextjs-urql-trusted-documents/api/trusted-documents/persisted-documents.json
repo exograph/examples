@@ -1,0 +1,7 @@
+{
+  "e456a6053ecca6f86175d6a9d33b27f29a3bda42b5755d1fca678aa1af23f095": "fragment TodoDetails on Todo { __typename completed title } query getTodosByCompletion($completed: Boolean!) { __typename todos(where: {completed: {eq: $completed}}, orderBy: {id: ASC}) { __typename id ...TodoDetails } }",
+  "24fbe0b7d1518a45ab95e216ee09cd122f8fd2bf9a3231aef844ee3f5df15aaa": "fragment TodoDetails on Todo { __typename completed title } query getTodos { __typename todos(orderBy: {id: ASC}) { __typename id ...TodoDetails } }",
+  "2e428015e5b0524710eccde1fe723352f5c60f10434ad9500fbb724e87651f23": "mutation createTodo($completed: Boolean!, $title: String!) { __typename createTodo(data: {title: $title, completed: $completed}) { __typename id } }",
+  "0f0a03f83895da47f2af5713055f80f7f486ab050c6ae40b92626b5d148ef677": "mutation updateTodo($completed: Boolean!, $id: Int!, $title: String!) { __typename updateTodo(id: $id, data: {title: $title, completed: $completed}) { __typename id } }",
+  "593a1dd7286414faad0437701f13af92f02a198b79df7eb8e174f405a3f17602": "mutation deleteTodo($id: Int!) { __typename deleteTodo(id: $id) { __typename id } }"
+}

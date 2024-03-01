@@ -1,0 +1,36 @@
+{
+  "format": "apollo-persisted-query-manifest",
+  "version": 1,
+  "operations": [
+    {
+      "id": "1155da445fb43a1c46081be15e11e1bc8189aef5068419cdddc076cd0f0dc0a8",
+      "name": "createTodo",
+      "type": "mutation",
+      "body": "mutation createTodo($title: String!, $completed: Boolean!) {\n  createTodo(data: {title: $title, completed: $completed}) {\n    id\n    __typename\n  }\n}"
+    },
+    {
+      "id": "5a13df33fb0157fa22b8299df3cabadf3204a9850d8f925e1038bd30e6fffc74",
+      "name": "deleteTodo",
+      "type": "mutation",
+      "body": "mutation deleteTodo($id: Int!) {\n  deleteTodo(id: $id) {\n    id\n    __typename\n  }\n}"
+    },
+    {
+      "id": "a71815911b30907e88ec3f1e5ced62054161194ffa404bc7b944f7ab0f960500",
+      "name": "getTodos",
+      "type": "query",
+      "body": "query getTodos {\n  todos(orderBy: {id: ASC}) {\n    id\n    ...TodoDetails\n    __typename\n  }\n}\n\nfragment TodoDetails on Todo {\n  title\n  completed\n  __typename\n}"
+    },
+    {
+      "id": "e9a28230c7fad7fd73d01a8fb80c4e005cd5666ac5a79a8a14a27047ecbe3ad1",
+      "name": "getTodosByCompletion",
+      "type": "query",
+      "body": "query getTodosByCompletion($completed: Boolean!) {\n  todos(where: {completed: {eq: $completed}}, orderBy: {id: ASC}) {\n    id\n    ...TodoDetails\n    __typename\n  }\n}\n\nfragment TodoDetails on Todo {\n  title\n  completed\n  __typename\n}"
+    },
+    {
+      "id": "11fd014232ce20e2ff0aa532c77c58099da7d98842ca18136e1abca01dcc7ff2",
+      "name": "updateTodo",
+      "type": "mutation",
+      "body": "mutation updateTodo($id: Int!, $title: String!, $completed: Boolean!) {\n  updateTodo(id: $id, data: {title: $title, completed: $completed}) {\n    id\n    ...TodoDetails\n    __typename\n  }\n}\n\nfragment TodoDetails on Todo {\n  title\n  completed\n  __typename\n}"
+    }
+  ]
+}
