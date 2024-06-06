@@ -61,9 +61,9 @@ A single-user todo application that uses the following technologies:
 
 # Concerts App from Documentation
 
-The sample application developed in the [Exograph Application Tutorial](https://exograph.dev/docs/application-tutorial/overview).
+The sample application developed in the [Exograph Application Tutorial](https://exograph.dev/docs/application-tutorial).
 
-[Source Code](concerts-app), [Documentation](https://exograph.dev/docs/application-tutorial/overview)
+[Source Code](concerts-app), [Documentation](https://exograph.dev/docs/application-tutorial)
 
 # Others
 
