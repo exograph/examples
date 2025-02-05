@@ -1,0 +1,26 @@
+stages:
+  - operation: |
+      mutation {
+        updateMessage(id: "m1-by-u1-in-u1-u2", data: {message: "Updated message"}) {
+          id
+          chat {
+            id
+          }
+          message
+          sender {
+            id
+          }
+        }
+      }
+    auth: |
+      {
+          "sub": "u2"
+      }
+    invariant: |
+      - path: ../../system-state.gql
+    response: |
+      {
+        "data": {
+          "updateMessage": null
+        }
+      }

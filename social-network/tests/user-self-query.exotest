@@ -1,0 +1,22 @@
+operation: |
+  query {
+      user(id: "u1") {
+        id
+        name
+        email
+      }
+  }
+auth: |
+  {
+    "sub": "u1"
+  }
+response: |
+  {
+    "data": {
+      "user": {
+        "id": "u1",
+        "name": "U1",
+        "email": "u1@example.com"
+      }
+    }
+  }

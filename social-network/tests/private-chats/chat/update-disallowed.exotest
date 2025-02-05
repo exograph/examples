@@ -1,0 +1,19 @@
+stages:
+  - operation: |
+      mutation {
+        updateChat(id: "u1-u2", data: {title: "Updated title"}) {
+          id
+        }
+      }
+    auth: |
+      {
+        "sub": "u2"
+      }
+    invariant: |
+      - path: ../../system-state.gql
+    response: |
+      {
+        "data": {
+          "updateChat": null
+        }
+      }

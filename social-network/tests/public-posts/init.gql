@@ -1,0 +1,108 @@
+stages:
+  - operation: |
+      mutation {
+        createPosts(data: [{id: "p1-by-u1", title: "By u1", content: "Hello from u1 1"}, {id: "p2-by-u1", title: "By u1", content: "Hello from u1 2"}]) {
+          id
+        }
+      }
+    auth: |
+      {
+        "sub": "u1"
+      }
+    response: |
+      {
+        "data": {
+          "createPosts": [
+            {
+              "id": "p1-by-u1"
+            },
+            {
+              "id": "p2-by-u1"
+            }
+          ]
+        }
+      }
+
+  - operation: |
+      mutation {
+        createPosts(data: [{id: "p3-by-u2", title: "By u2", content: "Hello from u2 1"}, {id: "p4-by-u2", title: "By u2", content: "Hello from u2 2"}]) {
+          id
+        }
+      }
+    auth: |
+      {
+        "sub": "u2"
+      }
+    response: |
+      {
+        "data": {
+          "createPosts": [
+            {
+              "id": "p3-by-u2"
+            },
+            {
+              "id": "p4-by-u2"
+            }
+          ]
+        }
+      }
+
+  - operation: |
+      mutation {
+        createComment(data: {id: "c1-by-u1-on-p1", post: {id: "p1-by-u1"}, content: "Comment 1 on p1 by u1"}) {
+          id
+        }
+      }
+    auth: |
+      {
+        "sub": "u1"
+      }
+    response: |
+      {
+        "data": {
+          "createComment": {
+            "id": "c1-by-u1-on-p1"
+          }
+        }
+      }
+
+  - operation: |
+      mutation {
+        createComment(data: {id: "c2-by-u2-on-p1", post: {id: "p1-by-u1"}, content: "Comment 2 on p1 by u2"}) {
+          id
+        }
+      }
+    auth: |
+      {
+        "sub": "u2"
+      }
+    response: |
+      {
+        "data": {
+          "createComment": {
+            "id": "c2-by-u2-on-p1"
+          }
+        }
+      }
+
+  - operation: |
+      mutation {
+        createComment(data: {id: "c3-by-u3-on-p2", post: {id: "p2-by-u1"}, content: "Comment 3 on p2 by u3"}) {
+          id
+        }
+      }
+    auth: |
+      {
+        "sub": "u3"
+      }
+    response: |
+      {
+        "data": {
+          "createComment": {
+            "id": "c3-by-u3-on-p2"
+          }
+        }
+      }
+
+
+        

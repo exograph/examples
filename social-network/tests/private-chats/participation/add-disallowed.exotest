@@ -1,0 +1,26 @@
+stages:
+  - operation: |
+      mutation {
+        createParticipation(data: {chat: {id: "u1-u2"}, user: {id: "u3"}}) {
+          chat {
+            id
+          }
+          user {
+            id
+          }
+        }
+      }
+    auth: |
+      {
+          "sub": "u2"
+      }
+    invariant: |
+      - path: ../system-state.gql
+    response: |
+      {
+        "errors": [
+          {
+            "message": "Not authorized"
+          }
+        ]
+      }

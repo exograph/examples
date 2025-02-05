@@ -1,0 +1,56 @@
+operation: |
+  query {
+    users {
+      id
+      name
+    }
+
+    chats {
+      id
+      title
+      owner {
+        id
+      }
+      participations {
+        user {
+          id
+        }
+      }
+    }
+
+    participations {
+      chat {
+        id
+      }
+      user {
+        id
+      }
+    }
+
+    posts {
+      id
+      title
+      content
+      user {
+        id
+        name
+      }
+      comments {
+        id
+        content
+        user {
+          id
+          name
+        }
+      }
+    }
+
+    comments {
+      id
+      content
+      user {
+        id
+        name
+      }
+    }
+  }

@@ -1,0 +1,20 @@
+stages:
+  - operation: |
+      mutation {
+        updatePost(id: "p1-by-u1", data: {title: "Updated by u1"}) {
+          id
+          title
+        }
+      }
+    auth: |
+      {
+        "sub": "u2"
+      }
+    invariant: |
+      - path: ../system-state.gql
+    response: |
+      {
+        "data": {
+          "updatePost": null
+        }
+      }

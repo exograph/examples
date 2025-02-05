@@ -1,0 +1,26 @@
+stages:
+  - operation: |
+      mutation {
+        deleteMessage(id: "m1-by-u1-in-u1-u2") {
+          id
+          chat {
+            id
+          }
+          message
+          sender {
+            id
+          }
+        }
+      }
+    auth: |
+      {
+          "sub": "u2"
+      }
+    invariant: |
+      - path: ../../system-state.gql
+    response: |
+      {
+        "data": {
+          "deleteMessage": null
+        }
+      }

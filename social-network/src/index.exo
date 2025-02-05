@@ -1,0 +1,74 @@
+context AuthContext {
+  @jwt("sub") id: String
+  @jwt role: String
+}
+
+@postgres
+module SocialDatabase {
+  @access(query=true, mutation=AuthContext.role == "admin")
+  type User {
+    @pk id: String
+    @readonly createdAt: LocalDateTime = now()
+    @update updatedAt: LocalDateTime = now()
+    name: String
+    @access(AuthContext.role == "admin" || self.id == AuthContext.id)
+    @unique email: String
+
+    // TODO: Remove all these once https://github.com/exograph/exograph/issues/700 is implemented
+    chats: Set<Chat>?
+    posts: Set<Post>?
+    comments: Set<Comment>?
+    participations: Set<Participation>?
+    messages: Set<Message>?
+  }
+
+  @access(query=true, mutation=AuthContext.role == "admin" || self.user.id == AuthContext.id)
+  type Post {
+    @pk id: String
+    title: String
+    content: String
+    @readonly user: User = AuthContext.id
+    comments: Set<Comment>?
+  }
+
+  @access(query=true, mutation=AuthContext.role == "admin" || self.user.id == AuthContext.id)
+  type Comment {
+    @pk id: String
+    post: Post
+    content: String
+    @readonly user: User = AuthContext.id
+  }
+
+  @access(
+    query=AuthContext.role == "admin" || self.participations.some(p => p.user.id == AuthContext.id), 
+    mutation=AuthContext.role == "admin" || self.owner.id == AuthContext.id
+  )
+  type Chat {
+    @pk id: String
+    title: String
+    @readonly owner: User = AuthContext.id
+    // TODO: Remove all these once https://github.com/exograph/exograph/issues/700 is implemented
+    messages: Set<Message>?
+    participations: Set<Participation>?
+  }
+
+    @access(
+    query=AuthContext.role == "admin" || self.chat.participations.some(p => p.user.id == AuthContext.id),
+    mutation=AuthContext.role == "admin" || self.chat.owner.id == AuthContext.id
+  )
+  type Participation {
+    @pk chat: Chat
+    @pk user: User
+  }
+
+  @access(
+    query=AuthContext.role == "admin" || self.chat.participations.some(p => p.user.id == AuthContext.id),
+    mutation=AuthContext.role == "admin" || self.sender.id == AuthContext.id
+  )
+  type Message {
+    @pk id: String
+    chat: Chat
+    @readonly sender: User = AuthContext.id
+    message: String
+  }
+}

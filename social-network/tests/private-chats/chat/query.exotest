@@ -1,0 +1,140 @@
+stages:
+  - operation: |
+      query {
+        chats {
+          id
+          title
+          owner {
+            id
+          }
+          participations {
+            user {
+              id
+              name
+            }
+          }
+        }
+      }
+    auth: |
+      {
+        "sub": "u1"
+      }
+    response: |
+      {
+        "data": {
+          "chats": [
+            {
+              "id": "u1-u2",
+              "title": "Hey u2 (by u1)!",
+              "owner": {
+                "id": "u1"
+              },
+              "participations": [
+                {
+                  "user": {
+                    "id": "u1",
+                    "name": "U1"
+                  }
+                },
+                {
+                  "user": {
+                    "id": "u2",
+                    "name": "U2"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "u1-u3",
+              "title": "Hey u3 (by u1)!",
+              "owner": {
+                "id": "u1"
+              },
+              "participations": [
+                {
+                  "user": {
+                    "id": "u1",
+                    "name": "U1"
+                  }
+                },
+                {
+                  "user": {
+                    "id": "u3",
+                    "name": "U3"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+
+  - operation: |
+      query {
+        chats {
+          id
+          title
+          owner {
+            id
+          }
+          participations {
+            user {
+              id
+              name
+            }
+          }
+        }
+      }
+    auth: |
+      {
+        "sub": "u2"
+      }
+    response: |
+      {
+        "data": {
+          "chats": [
+            {
+              "id": "u1-u2",
+              "title": "Hey u2 (by u1)!",
+              "owner": {
+                "id": "u1"
+              },
+              "participations": [
+                {
+                  "user": {
+                    "id": "u1",
+                    "name": "U1"
+                  }
+                },
+                {
+                  "user": {
+                    "id": "u2",
+                    "name": "U2"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "u2-u3",
+              "title": "Hey u3 (by u2)!",
+              "owner": {
+                "id": "u2"
+              },
+              "participations": [
+                {
+                  "user": {
+                    "id": "u2",
+                    "name": "U2"
+                  }
+                },
+                {
+                  "user": {
+                    "id": "u3",
+                    "name": "U3"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }

@@ -1,0 +1,18 @@
+operation: |
+  query {
+      user(id: "u1") {
+        id
+        name
+        email
+      }
+  }
+auth: |
+  {
+    "sub": "u2"
+  }
+response: |
+  {
+    "data": {
+      "user": null
+    }
+  }

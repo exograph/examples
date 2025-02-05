@@ -1,0 +1,113 @@
+stages:
+  - operation: |
+      mutation {
+        deleteMessages(where: {chat: {id: {eq: "u1-u3"}}}) {
+          id
+        }
+        deleteParticipations(where: {chat: {id: {eq: "u1-u3"}}}) {
+          chat {
+            id
+          }
+        }
+        deleteChat(id: "u1-u3") {
+          id
+        }
+      }
+    auth: |
+      {
+        "sub": "u2"
+      }
+    response: |
+      {
+        "data": {
+          "deleteMessages": [],
+          "deleteParticipations": [],
+          "deleteChat": null
+        }
+      }
+
+
+  - operation: |
+      query {
+        chats {
+          id
+          messages {
+            id
+          }
+          participations {
+            user {
+              id
+            }
+          }
+        }
+      }
+    auth: |
+      {
+        "role": "admin"
+      }
+    response: |
+      {
+        "data": {
+          "chats": [
+            {
+              "id": "u1-u2",
+              "messages": [
+                {
+                  "id": "m1-by-u1-in-u1-u2"
+                },
+                {
+                  "id": "m2-by-u2-in-u1-u2"
+                }
+              ],
+              "participations": [
+                {
+                  "user": {
+                    "id": "u1"
+                  }
+                },
+                {
+                  "user": {
+                    "id": "u2"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "u2-u3",
+              "messages": [
+                {
+                  "id": "m3-by-u3-in-u2-u3"
+                }
+              ],
+              "participations": [
+                {
+                  "user": {
+                    "id": "u2"
+                  }
+                },
+                {
+                  "user": {
+                    "id": "u3"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "u1-u3",
+              "messages": [],
+              "participations": [
+                {
+                  "user": {
+                    "id": "u1"
+                  }
+                },
+                {
+                  "user": {
+                    "id": "u3"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }

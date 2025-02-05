@@ -1,0 +1,30 @@
+operation: |
+  query {
+      users @unordered {
+        id
+        name
+      }
+  }
+response: |
+  {
+    "data": {
+      "users": [
+        {
+          "id": "u1",
+          "name": "U1"
+        },
+        {
+          "id": "u2",
+          "name": "U2"
+        },
+        {
+          "id": "u3",
+          "name": "U3"
+        },
+        {
+          "id": "u4",
+          "name": "U4"
+        }
+      ]
+    }
+  }

@@ -1,0 +1,16 @@
+operation: |
+  query {
+      users @unordered {
+        id
+        email
+        name
+      }
+  }
+response: |
+  {
+    "errors": [
+      {
+        "message": "Not authorized"
+      }
+    ]
+  }

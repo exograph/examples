@@ -1,0 +1,146 @@
+stages:
+  - operation: |
+      mutation {
+        createMessage(data: {id: "m1-by-u1-in-u1-u2", chat: {id: "u1-u2"}, message: "Hello from u1!"}) {
+          id
+          chat {
+            id
+          }
+          message
+          sender {
+            id
+          }
+        }
+      }
+    auth: |
+      {
+          "sub": "u1"
+      }
+    response: |
+      {
+        "data": {
+          "createMessage": {
+            "id": "m1-by-u1-in-u1-u2",
+            "chat": {
+              "id": "u1-u2"
+            },
+            "message": "Hello from u1!",
+            "sender": {
+              "id": "u1"
+            }
+          }
+        }
+      }
+
+  - operation: |
+      mutation {
+        createMessage(data: {id: "m2-by-u2-in-u1-u2", chat: {id: "u1-u2"}, message: "Hello from u2!"}) {
+          id
+          chat {
+            id
+          }
+          message
+          sender {
+            id
+          }
+        }
+      }
+    auth: |
+      {
+          "sub": "u2"
+      }
+    response: |
+      {
+        "data": {
+          "createMessage": {
+            "id": "m2-by-u2-in-u1-u2",
+            "chat": {
+              "id": "u1-u2"
+            },
+            "message": "Hello from u2!",
+            "sender": {
+              "id": "u2"
+            }
+          }
+        }
+      }
+
+  - operation: |
+      mutation {
+        createMessage(data: {id: "m3-by-u3-in-u2-u3", chat: {id: "u2-u3"}, message: "Hello from u3 (non-owner)!"}) {
+          id
+          chat {
+            id
+          }
+          message
+          sender {
+            id
+          }
+        }
+      }
+    auth: |
+      {
+          "sub": "u3"
+      }
+    response: |
+      {
+        "data": {
+          "createMessage": {
+            "id": "m3-by-u3-in-u2-u3",
+            "chat": {
+              "id": "u2-u3"
+            },
+            "message": "Hello from u3 (non-owner)!",
+            "sender": {
+              "id": "u3"
+            }
+          }
+        }
+      }
+
+  - operation: |
+      query {
+        messages {
+          id
+          message
+          sender {
+            id
+            name
+          }
+        }
+      }
+    auth: |
+      {
+          "role": "admin"
+      }
+    response: |
+      {
+        "data": {
+          "messages": [
+            {
+              "id": "m1-by-u1-in-u1-u2",
+              "message": "Hello from u1!",
+              "sender": {
+                "id": "u1",
+                "name": "U1"
+              }
+            },
+            {
+              "id": "m2-by-u2-in-u1-u2",
+              "message": "Hello from u2!",
+              "sender": {
+                "id": "u2",
+                "name": "U2"
+              }
+            },
+            {
+              "id": "m3-by-u3-in-u2-u3",
+              "message": "Hello from u3 (non-owner)!",
+              "sender": {
+                "id": "u3",
+                "name": "U3"
+              }
+            }
+          ]
+        }
+      }

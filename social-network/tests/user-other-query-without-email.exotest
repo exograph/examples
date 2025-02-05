@@ -1,0 +1,20 @@
+operation: |
+  query {
+      user(id: "u1") {
+        id
+        name
+      }
+  }
+auth: |
+  {
+    "sub": "u2"
+  }
+response: |
+  {
+    "data": {
+      "user": {
+        "id": "u1",
+        "name": "U1"
+      }
+    }
+  }

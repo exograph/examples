@@ -1,0 +1,51 @@
+stages:
+  - operation: |
+      mutation {
+        updateChat(id: "u1-u2", data: {title: "Updated title"}) {
+          id
+        }
+      }
+    auth: |
+      {
+        "sub": "u1"
+      }
+    response: |
+      {
+        "data": {
+          "updateChat": {
+            "id": "u1-u2"
+          }
+        }
+      }
+
+  - operation: |
+      query {
+        chats {
+          id
+          title
+        }
+      }
+    auth: |
+      {
+        "role": "admin"
+      }
+    response: |
+      {
+        "data": {
+          "chats": [
+            {
+              "id": "u2-u3",
+              "title": "Hey u3 (by u2)!"
+            },
+            {
+              "id": "u1-u3",
+              "title": "Hey u3 (by u1)!"
+            },
+            {
+              "id": "u1-u2",
+              "title": "Updated title"
+            }
+          ]
+        }
+      }
+

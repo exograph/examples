@@ -1,0 +1,84 @@
+operation: |
+  query {
+    posts @unordered {
+      id
+      title
+      content
+      comments @unordered {
+        id
+        content
+        user {
+          id
+        }
+      }
+      user {
+        id
+      }
+    }
+  }
+response: |
+  {
+    "data": {
+      "posts": [
+        {
+          "id": "p1-by-u1",
+          "title": "By u1",
+          "content": "Hello from u1 1",
+          "comments": [
+            {
+              "id": "c1-by-u1-on-p1",
+              "content": "Comment 1 on p1 by u1",
+              "user": {
+                "id": "u1"
+              }
+            },
+            {
+              "id": "c2-by-u2-on-p1",
+              "content": "Comment 2 on p1 by u2",
+              "user": {
+                "id": "u2"
+              }
+            }
+          ],
+          "user": {
+            "id": "u1"
+          }
+        },
+        {
+          "id": "p2-by-u1",
+          "title": "By u1",
+          "content": "Hello from u1 2",
+          "comments": [
+            {
+              "id": "c3-by-u3-on-p2",
+              "content": "Comment 3 on p2 by u3",
+              "user": {
+                "id": "u3"
+              }
+            }
+          ],
+          "user": {
+            "id": "u1"
+          }
+        },
+        {
+          "id": "p3-by-u2",
+          "title": "By u2",
+          "content": "Hello from u2 1",
+          "comments": [],
+          "user": {
+            "id": "u2"
+          }
+        },
+        {
+          "id": "p4-by-u2",
+          "title": "By u2",
+          "content": "Hello from u2 2",
+          "comments": [],
+          "user": {
+            "id": "u2"
+          }
+        }
+      ]
+    }
+  }

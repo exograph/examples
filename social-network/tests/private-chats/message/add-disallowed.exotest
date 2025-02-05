@@ -1,0 +1,26 @@
+stages:
+  - operation: |
+      mutation {
+        createMessage(data: {id: "m-u3-disallowed", chat: {id: "u1-u2"}, message: "Hello from u3 (non-participant)!"}) {
+          id
+          chat {
+            id
+          }
+          message
+          sender {
+            id
+          }
+        }
+      }
+    auth: |
+      {
+          "sub": "u3"
+      }
+    invariant: |
+      - path: ../system-stage.gql
+    response: |
+      {
+        "data": {
+          "createMessage": null
+        }
+      }

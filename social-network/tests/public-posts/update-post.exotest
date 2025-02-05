@@ -1,0 +1,52 @@
+stages:
+  - operation: |
+      mutation {
+        updatePost(id: "p1-by-u1", data: {title: "Updated by u1"}) {
+          id
+          title
+        }
+      }
+    auth: |
+      {
+        "sub": "u1"
+      }
+    response: |
+      {
+        "data": {
+          "updatePost": {
+            "id": "p1-by-u1",
+            "title": "Updated by u1"
+          }
+        }
+      }
+  - operation: |
+      query {
+        posts @unordered {
+          id
+          title
+        }
+      }
+    response: |
+      {
+        "data": {
+          "posts": [
+            {
+              "id": "p2-by-u1",
+              "title": "By u1"
+            },
+            {
+              "id": "p3-by-u2",
+              "title": "By u2"
+            },
+            {
+              "id": "p4-by-u2",
+              "title": "By u2"
+            },
+            {
+              "id": "p1-by-u1",
+              "title": "Updated by u1"
+            }
+          ]
+        }
+      }
+

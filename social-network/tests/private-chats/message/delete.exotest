@@ -1,0 +1,57 @@
+stages:
+  - operation: |
+      mutation {
+        deleteMessage(id: "m1-by-u1-in-u1-u2") {
+          id
+          chat {
+            id
+          }
+          message
+          sender {
+            id
+          }
+        }
+      }
+    auth: |
+      {
+          "sub": "u1"
+      }
+    response: |
+      {
+        "data": {
+          "deleteMessage": {
+            "id": "m1-by-u1-in-u1-u2",
+            "chat": {
+              "id": "u1-u2"
+            },
+            "message": "Hello from u1!",
+            "sender": {
+              "id": "u1"
+            }
+          }
+        }
+      }
+
+  - operation: |
+      query {
+        messages {
+          id
+        }
+      }
+    auth: |
+      {
+        "role": "admin"
+      }
+    response: |
+      {
+        "data": {
+          "messages": [
+            {
+              "id": "m2-by-u2-in-u1-u2"
+            },
+            {
+              "id": "m3-by-u3-in-u2-u3"
+            }
+          ]
+        }
+      }
