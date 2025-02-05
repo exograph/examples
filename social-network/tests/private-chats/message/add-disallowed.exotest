@@ -16,8 +16,8 @@ stages:
       {
           "sub": "u3"
       }
-    invariant: |
-      - path: ../system-stage.gql
+    invariants:
+      - path: ../../system-state.gql
     response: |
       {
         "data": {

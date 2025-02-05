@@ -14,8 +14,8 @@ stages:
       {
           "sub": "u2"
       }
-    invariant: |
-      - path: ../system-state.gql
+    invariants:
+      - path: ../../system-state.gql
     response: |
       {
         "errors": [
