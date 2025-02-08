@@ -1,60 +1,245 @@
-operation: |
-  query {
-    users {
-      id
-      name
-    }
-
-    chats {
-      id
-      title
-      owner {
-        id
-      }
-      participations {
-        user {
-          id
-        }
-      }
-    }
-
-    participations {
-      chat {
-        id
-      }
-      user {
-        id
-      }
-    }
-
-    posts {
-      id
-      title
-      content
-      user {
-        id
-        name
-      }
-      comments {
-        id
-        content
-        user {
+stages:
+  - operation: |
+      query {
+        users {
           id
           name
         }
-      }
-    }
 
-    comments {
-      id
-      content
-      user {
-        id
-        name
+        chats {
+          id
+          title
+          owner {
+            id
+          }
+          participations {
+            user {
+              id
+            }
+          }
+        }
+
+        participations {
+          chat {
+            id
+          }
+          user {
+            id
+          }
+        }
+
+        posts {
+          id
+          title
+          content
+          user {
+            id
+            name
+          }
+          comments {
+            id
+            content
+            user {
+              id
+              name
+            }
+          }
+        }
+
+        comments {
+          id
+          content
+          user {
+            id
+            name
+          }
+        }
       }
-    }
-  }
-auth: | 
-  {
-    role: "admin"
-  }
+    auth: | 
+      {
+        "sub": "u1"
+      }
+      
+  - operation: |
+      query {
+        users {
+          id
+          name
+        }
+
+        chats {
+          id
+          title
+          owner {
+            id
+          }
+          participations {
+            user {
+              id
+            }
+          }
+        }
+
+        participations {
+          chat {
+            id
+          }
+          user {
+            id
+          }
+        }
+
+        posts {
+          id
+          title
+          content
+          user {
+            id
+            name
+          }
+          comments {
+            id
+            content
+            user {
+              id
+              name
+            }
+          }
+        }
+
+        comments {
+          id
+          content
+          user {
+            id
+            name
+          }
+        }
+      }
+    auth: | 
+      {
+        "sub": "u2"
+      }
+
+  - operation: |
+      query {
+        users {
+          id
+          name
+        }
+
+        chats {
+          id
+          title
+          owner {
+            id
+          }
+          participations {
+            user {
+              id
+            }
+          }
+        }
+
+        participations {
+          chat {
+            id
+          }
+          user {
+            id
+          }
+        }
+
+        posts {
+          id
+          title
+          content
+          user {
+            id
+            name
+          }
+          comments {
+            id
+            content
+            user {
+              id
+              name
+            }
+          }
+        }
+
+        comments {
+          id
+          content
+          user {
+            id
+            name
+          }
+        }
+      }
+    auth: | 
+      {
+        "sub": "u3"
+      }
+
+
+  - operation: |
+      query {
+        users {
+          id
+          name
+        }
+
+        chats {
+          id
+          title
+          owner {
+            id
+          }
+          participations {
+            user {
+              id
+            }
+          }
+        }
+
+        participations {
+          chat {
+            id
+          }
+          user {
+            id
+          }
+        }
+
+        posts {
+          id
+          title
+          content
+          user {
+            id
+            name
+          }
+          comments {
+            id
+            content
+            user {
+              id
+              name
+            }
+          }
+        }
+
+        comments {
+          id
+          content
+          user {
+            id
+            name
+          }
+        }
+      }
+    auth: | 
+      {
+        "sub": "u4"
+      }

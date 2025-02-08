@@ -11,4 +11,4 @@ An Exograph implementation of the model in the [Modelling Authorization for a So
 
 1. `Message`, `Chat`, `Comment`, `Post` mark the fields of the `User` type as `@readonly`, If the `@readonly`-ness is not desired (for example, an admin can send a message on behalf of a user!), we can remove it without any other changes.
 
-2. In the Exograph version, anyone can see any user's field (except for the email address, as intended in the RLS version, using field-level access rules), but only admins can mutate a user. This doesn't strictly match the RLS version, but it follows the domain expectation. If desired, we can introduce `UserDetails` (related to `User` through a one-to-one relationship) and have access rules on `UserDetails` instead.
+2. In the Exograph version, anyone can see any user's field (except for the email address, as intended in the RLS version, using field-level access rules), but only the user can mutate their own fields. This doesn't strictly match the RLS version, but it follows the domain expectation. If desired, we can introduce `UserDetails` (related to `User` through a one-to-one relationship) and have access rules on `UserDetails` instead.

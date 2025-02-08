@@ -36,27 +36,3 @@ stages:
           "deleteChat": null
         }
       }
-
-  - operation: |
-      query {
-        chats {
-          id
-        }
-      }
-    auth: |
-      {
-        "role": "admin"
-      }
-    response: |
-      {
-        "data": {
-          "chats": [
-            {
-              "id": "u1-u2"
-            },
-            {
-              "id": "u2-u3"
-            }
-          ]
-        }
-      }

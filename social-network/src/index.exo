@@ -1,17 +1,16 @@
 context AuthContext {
   @jwt("sub") id: String
-  @jwt role: String
 }
 
 @postgres
 module SocialDatabase {
-  @access(query=true, mutation=AuthContext.role == "admin")
+  @access(query=true, mutation=self.id==AuthContext.id)
   type User {
     @pk id: String
     @readonly createdAt: LocalDateTime = now()
     @update updatedAt: LocalDateTime = now()
     name: String
-    @access(AuthContext.role == "admin" || self.id == AuthContext.id)
+    @access(self.id == AuthContext.id)
     @unique email: String
 
     // TODO: Remove all these once https://github.com/exograph/exograph/issues/700 is implemented
@@ -22,7 +21,7 @@ module SocialDatabase {
     messages: Set<Message>?
   }
 
-  @access(query=true, mutation=AuthContext.role == "admin" || self.user.id == AuthContext.id)
+  @access(query=true, mutation=self.user.id == AuthContext.id)
   type Post {
     @pk id: String
     title: String
@@ -31,7 +30,7 @@ module SocialDatabase {
     comments: Set<Comment>?
   }
 
-  @access(query=true, mutation=AuthContext.role == "admin" || self.user.id == AuthContext.id)
+  @access(query=true, mutation=self.user.id == AuthContext.id)
   type Comment {
     @pk id: String
     post: Post
@@ -40,8 +39,8 @@ module SocialDatabase {
   }
 
   @access(
-    query=AuthContext.role == "admin" || self.participations.some(p => p.user.id == AuthContext.id), 
-    mutation=AuthContext.role == "admin" || self.owner.id == AuthContext.id
+    query=self.participations.some(p => p.user.id == AuthContext.id), 
+    mutation=self.owner.id == AuthContext.id
   )
   type Chat {
     @pk id: String
@@ -52,9 +51,9 @@ module SocialDatabase {
     participations: Set<Participation>?
   }
 
-    @access(
-    query=AuthContext.role == "admin" || self.chat.participations.some(p => p.user.id == AuthContext.id),
-    mutation=AuthContext.role == "admin" || self.chat.owner.id == AuthContext.id
+  @access(
+    query=self.chat.participations.some(p => p.user.id == AuthContext.id),
+    mutation=self.chat.owner.id == AuthContext.id
   )
   type Participation {
     @pk chat: Chat
@@ -62,8 +61,8 @@ module SocialDatabase {
   }
 
   @access(
-    query=AuthContext.role == "admin" || self.chat.participations.some(p => p.user.id == AuthContext.id),
-    mutation=AuthContext.role == "admin" || self.sender.id == AuthContext.id
+    query=self.chat.participations.some(p => p.user.id == AuthContext.id),
+    mutation=self.sender.id == AuthContext.id
   )
   type Message {
     @pk id: String

@@ -31,27 +31,3 @@ stages:
           }
         }
       }
-
-  - operation: |
-      query {
-        messages {
-          id
-        }
-      }
-    auth: |
-      {
-        "role": "admin"
-      }
-    response: |
-      {
-        "data": {
-          "messages": [
-            {
-              "id": "m2-by-u2-in-u1-u2"
-            },
-            {
-              "id": "m3-by-u3-in-u2-u3"
-            }
-          ]
-        }
-      }
