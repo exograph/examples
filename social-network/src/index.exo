@@ -13,12 +13,8 @@ module SocialDatabase {
     @access(self.id == AuthContext.id)
     @unique email: String
 
-    // TODO: Remove all these once https://github.com/exograph/exograph/issues/700 is implemented
     chats: Set<Chat>?
     posts: Set<Post>?
-    comments: Set<Comment>?
-    participations: Set<Participation>?
-    messages: Set<Message>?
   }
 
   @access(query=true, mutation=self.user.id == AuthContext.id)
@@ -35,7 +31,7 @@ module SocialDatabase {
     @pk id: String
     post: Post
     content: String
-    @readonly user: User = AuthContext.id
+    @manyToOne @readonly user: User = AuthContext.id
   }
 
   @access(
@@ -46,7 +42,6 @@ module SocialDatabase {
     @pk id: String
     title: String
     @readonly owner: User = AuthContext.id
-    // TODO: Remove all these once https://github.com/exograph/exograph/issues/700 is implemented
     messages: Set<Message>?
     participations: Set<Participation>?
   }
@@ -57,7 +52,7 @@ module SocialDatabase {
   )
   type Participation {
     @pk chat: Chat
-    @pk user: User
+    @manyToOne @pk user: User
   }
 
   @access(
@@ -67,7 +62,7 @@ module SocialDatabase {
   type Message {
     @pk id: String
     chat: Chat
-    @readonly sender: User = AuthContext.id
+    @manyToOne @readonly sender: User = AuthContext.id
     message: String
   }
 }
