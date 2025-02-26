@@ -20,7 +20,9 @@ stages:
       - path: ../../system-state.gql
     response: |
       {
-        "data": {
-          "createMessage": null
-        }
+        "errors": [
+          {
+            "message": "Not authorized"
+          }
+        ]
       }

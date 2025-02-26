@@ -57,7 +57,7 @@ module SocialDatabase {
 
   @access(
     query=self.chat.participations.some(p => p.user.id == AuthContext.id),
-    mutation=self.sender.id == AuthContext.id
+    mutation=self.sender.id == AuthContext.id && self.chat.participations.some(p => p.user.id == AuthContext.id)
   )
   type Message {
     @pk id: String

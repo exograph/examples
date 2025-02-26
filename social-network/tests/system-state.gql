@@ -54,6 +54,14 @@ stages:
             name
           }
         }
+
+        messages {
+          id
+          message
+          sender {
+            id
+          }
+        }
       }
     auth: | 
       {
@@ -115,6 +123,14 @@ stages:
             name
           }
         }
+
+        messages {
+          id
+          message
+          sender {
+            id
+          }
+        }
       }
     auth: | 
       {
@@ -174,6 +190,14 @@ stages:
           user {
             id
             name
+          }
+        }
+
+        messages {
+          id
+          message
+          sender {
+            id
           }
         }
       }
@@ -238,6 +262,14 @@ stages:
             name
           }
         }
+
+        messages {
+          id
+          message
+          sender {
+            id
+          }
+        }        
       }
     auth: | 
       {
