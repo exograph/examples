@@ -1,0 +1,225 @@
+context AuthContext {
+  @jwt("sub") id: Uuid
+  @jwt role: String
+}
+
+@postgres
+module Database {
+  @access(query=AuthContext.id == self.customer.id || AuthContext.id == self.customer.financialAdvisor.id ||
+                AuthContext.role == "admin")
+  type Account {
+    @pk id: Uuid = uuidGenerateV4()
+    @precision(15) @scale(2) availableBalance: Decimal = "0.00"
+    @precision(15) @scale(2) balance: Decimal = "0.00"
+    @precision(6) @scale(4) interestRate: Decimal? = "0.0000"
+    @precision(15) @scale(2) minimumBalance: Decimal? = "0.00"
+    @precision(8) @scale(2) monthlyFee: Decimal? = "0.00"
+    createdAt: Instant? = now()
+    updatedAt: Instant? = now()
+    dateOpened: LocalDate = now()
+    dateClosed: LocalDate?
+    @unique @maxLength(20) accountNumber: String
+    @maxLength(20) @index accountType: String
+    @maxLength(20) @index status: String = "active"
+    @index customer: Customer
+    complianceReports: Set<ComplianceReport>
+    @relation("counterpartyAccount") counterpartyTransactions: Set<Transaction>
+    @relation("account") transactions: Set<Transaction>
+}
+
+  @access(query=AuthContext.id == self.financialAdvisor.id || AuthContext.role == "admin")
+  @table(name="advisor_performance")
+  type AdvisorPerformance {
+    @pk financialAdvisor: FinancialAdvisor
+    totalAssetsUnderManagement: Decimal?
+    totalInvestmentAssets: Decimal?
+    lastUpdated: Instant?
+    @bits64 totalAccounts: Int?
+    @bits64 totalCustomers: Int?
+    @bits64 totalPortfolios: Int?
+    @maxLength(20) employeeId: String?
+    @maxLength(100) firstName: String?
+    @maxLength(100) lastName: String?
+    @index branch: Branch?
+  }
+
+  @access(query=AuthContext.role == "admin")
+  type AuditLog {
+    @pk id: Uuid = uuidGenerateV4()
+    @index complianceFlag: Boolean? = false
+    @index timestamp: Instant = now()
+    severityLevel: Int? = 1
+    newValues: Json?
+    oldValues: Json?
+    @maxLength(20) @index actionType: String
+    @maxLength(50) userRole: String
+    @maxLength(20) userType: String
+    description: String?
+    @maxLength(45) ipAddress: String?
+    @maxLength(50) @index("idx_audit_table_record") tableName: String?
+    userAgent: String?
+    @index userId: Uuid
+    @index("idx_audit_table_record") recordId: Uuid?
+    sessionId: Uuid?
+  }
+
+  @access(query=true)
+  type Branch {
+    @pk id: Uuid = uuidGenerateV4()
+    createdAt: Instant? = now()
+    updatedAt: Instant? = now()
+    @maxLength(255) addressLine1: String
+    @unique @maxLength(10) branchCode: String
+    @maxLength(100) branchName: String
+    @maxLength(100) city: String
+    @maxLength(20) region: String
+    @maxLength(2) state: String
+    @maxLength(10) zipCode: String
+    @maxLength(255) addressLine2: String?
+    @maxLength(20) fax: String?
+    @maxLength(20) phone: String?
+    managerId: Uuid?
+    advisorPerformances: Set<AdvisorPerformance>
+    customers: Set<Customer>
+    customerAccountSummaries: Set<CustomerAccountSummary>
+    financialAdvisors: Set<FinancialAdvisor>
+  }
+
+  @access(query=AuthContext.role == "admin")
+  type ComplianceReport {
+    @pk id: Uuid = uuidGenerateV4()
+    regulatoryFilingRequired: Boolean? = false
+    generatedDate: Instant = now()
+    createdAt: Instant? = now()
+    reviewDate: Instant?
+    updatedAt: Instant? = now()
+    priorityLevel: Int? = 2
+    reportData: Json
+    filingDeadline: LocalDate?
+    @unique @maxLength(20) reportNumber: String
+    @maxLength(30) @index reportType: String
+    @maxLength(20) @index status: String = "draft"
+    resolutionNotes: String?
+    reviewNotes: String?
+    summary: String?
+    @index generatedByUserId: Uuid
+    reviewerId: Uuid?
+    @index account: Account?
+    @index customer: Customer?
+    @index transaction: Transaction?
+  }
+
+  @access(query=AuthContext.id == self.id || AuthContext.id == self.financialAdvisor.id || AuthContext.role == "admin")
+  type Customer {
+    @pk id: Uuid = uuidGenerateV4()
+    createdAt: Instant? = now()
+    updatedAt: Instant? = now()
+    dateOfBirth: LocalDate
+    onboardingDate: LocalDate = now()
+    kycCompletedDate: LocalDate?
+    @maxLength(255) addressLine1: String
+    @maxLength(100) city: String
+    @unique @maxLength(20) customerNumber: String
+    @unique @maxLength(255) @index email: String
+    @maxLength(100) firstName: String
+    @maxLength(20) kycStatus: String = "pending"
+    @maxLength(100) lastName: String
+    @maxLength(20) riskTolerance: String = "moderate"
+    @maxLength(2) state: String
+    @maxLength(20) @index status: String = "active"
+    @maxLength(10) zipCode: String
+    @maxLength(255) addressLine2: String?
+    @maxLength(20) phone: String?
+    ssn: String?
+    @index branch: Branch
+    @index financialAdvisor: FinancialAdvisor?
+    accounts: Set<Account>
+    complianceReports: Set<ComplianceReport>
+    customerAccountSummaries: Set<CustomerAccountSummary>
+    investmentPortfolios: Set<InvestmentPortfolio>
+  }
+
+  @access(query=AuthContext.id == self.customer.id || AuthContext.id == self.financialAdvisor.id || AuthContext.role == "admin")
+  @table(name="customer_account_summary")
+  type CustomerAccountSummary {
+    @pk customer: Customer
+    totalBalance: Decimal?
+    totalPortfolioValue: Decimal?
+    lastUpdated: Instant?
+    @bits64 totalAccounts: Int?
+    @bits64 totalPortfolios: Int?
+    @maxLength(20) customerNumber: String?
+    @maxLength(100) firstName: String?
+    @maxLength(100) lastName: String?
+    @index branch: Branch?
+    @index financialAdvisor: FinancialAdvisor?
+  }
+
+  @access(query=AuthContext.id == self.id || AuthContext.role == "admin")
+  type FinancialAdvisor {
+    @pk id: Uuid = uuidGenerateV4()
+    @precision(5) @scale(4) commissionRate: Decimal?
+    createdAt: Instant? = now()
+    updatedAt: Instant? = now()
+    hireDate: LocalDate
+    terminationDate: LocalDate?
+    @unique @maxLength(255) email: String
+    @unique @maxLength(20) employeeId: String
+    @maxLength(100) firstName: String
+    @maxLength(100) lastName: String
+    @unique @maxLength(50) licenseNumber: String
+    @maxLength(20) @index status: String = "active"
+    @maxLength(20) phone: String?
+    @maxLength(100) specialization: String?
+    @index managerId: Uuid?
+    @index branch: Branch
+    advisorPerformances: Set<AdvisorPerformance>
+    customers: Set<Customer>
+    customerAccountSummaries: Set<CustomerAccountSummary>
+    investmentPortfolios: Set<InvestmentPortfolio>
+  }
+
+  @access(query=AuthContext.id == self.customer.id || AuthContext.id == self.financialAdvisor.id || AuthContext.role == "admin")
+  type InvestmentPortfolio {
+    @pk id: Uuid = uuidGenerateV4()
+    @precision(15) @scale(2) cashBalance: Decimal = "0.00"
+    @precision(15) @scale(2) totalValue: Decimal = "0.00"
+    @precision(8) @scale(4) performanceYtd: Decimal?
+    createdAt: Instant? = now()
+    updatedAt: Instant? = now()
+    currentRiskScore: Int?
+    targetRiskScore: Int?
+    createdDate: LocalDate = now()
+    lastRebalanceDate: LocalDate?
+    @maxLength(100) portfolioName: String
+    @maxLength(20) status: String = "active"
+    @maxLength(50) benchmarkIndex: String?
+    investmentStrategy: String?
+    @index customer: Customer
+    @index financialAdvisor: FinancialAdvisor
+  }
+
+  @access(query=AuthContext.id == self.account.customer.id ||
+                AuthContext.id == self.counterpartyAccount.customer.id || 
+                AuthContext.id == self.account.customer.financialAdvisor.id ||
+                AuthContext.id == self.counterpartyAccount.customer.financialAdvisor.id ||
+                AuthContext.role == "admin")
+  type Transaction {
+    @pk id: Uuid = uuidGenerateV4()
+    @precision(15) @scale(2) amount: Decimal
+    @precision(15) @scale(2) balanceAfter: Decimal
+    @precision(8) @scale(2) fees: Decimal? = "0.00"
+    @index transactionDate: Instant = now()
+    createdAt: Instant? = now()
+    updatedAt: Instant? = now()
+    @maxLength(20) @index status: String = "pending"
+    @maxLength(20) @index transactionType: String
+    description: String?
+    @maxLength(50) referenceNumber: String?
+    authorizedByUserId: Uuid?
+    @index initiatedByUserId: Uuid?
+    @index account: Account
+    @index counterpartyAccount: Account?
+    complianceReports: Set<ComplianceReport>
+  }
+}
