@@ -5,7 +5,8 @@ context AuthContext {
 
 @postgres
 module Database {
-  @access(query=AuthContext.id == self.customer.id || AuthContext.id == self.customer.financialAdvisor.id ||
+  @access(query=AuthContext.id == self.customer.id || 
+                AuthContext.id == self.customer.financialAdvisor.id ||
                 AuthContext.role == "admin")
   type Account {
     @pk id: Uuid = uuidGenerateV4()
